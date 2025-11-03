@@ -95,13 +95,13 @@ def main():
                                                        None)
 
     # Save parameters to a file
-    cv_file = cv2.FileStorage('calibration_chessboard.yaml', cv2.FILE_STORAGE_WRITE)
+    cv_file = cv2.FileStorage('../lib/calibration_chessboard.yaml', cv2.FILE_STORAGE_WRITE)
     cv_file.write('K', mtx)
     cv_file.write('D', dist)
     cv_file.release()
 
     # Load the parameters from the saved file
-    cv_file = cv2.FileStorage('calibration_chessboard.yaml', cv2.FILE_STORAGE_READ)
+    cv_file = cv2.FileStorage('../lib/calibration_chessboard.yaml', cv2.FILE_STORAGE_READ)
     mtx = cv_file.getNode('K').mat()
     dst = cv_file.getNode('D').mat()
     cv_file.release()
