@@ -10,6 +10,7 @@ def start():
     server.listen(1)
     conn, addr = server.accept()
     conn.send(json.dumps({'type': 'connected'}).encode('utf-8'))
+    print(f"Connected to {addr}")
 
 def get_command(robot_time):
     data = conn.recv(1024).decode('utf-8')
