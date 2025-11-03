@@ -31,6 +31,7 @@ ESTOP = False
 while not ESTOP:
     robot_time = time.time() - start_time
     command = ds.get_command(robot_time)
+    print(command)
     if command:
         if command['type'] == 'set_robot_status':
             robot_state = command['value']
