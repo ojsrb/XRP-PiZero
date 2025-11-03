@@ -30,6 +30,10 @@ ESTOP = False
 
 while not ESTOP:
     robot_time = time.time() - start_time
+    ds.send_telemetry({
+        'voltage': 100.0,
+        'status': 0
+    }, robot_time)
     command = ds.get_command(robot_time)
     print(command)
     if command:
