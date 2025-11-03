@@ -3,10 +3,10 @@ import json
 
 conn = None
 addr = None
-server = None
+server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
 def start():
-    server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    socket.setdefaulttimeout(None)
     server.bind(('0.0.0.0', 5000))
     server.listen(1)
     print("awaiting connection...")
