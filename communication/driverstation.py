@@ -7,6 +7,7 @@ server.bind(('0.0.0.0', 5000))
 server.listen(1)
 print("awaiting connection...")
 conn, addr = server.accept()
+conn.settimeout(0.1)
 print("connected")
 conn.send(json.dumps({'type': 'connected', 'ip': addr[0], 'port': addr[1] }).encode('utf-8'))
 

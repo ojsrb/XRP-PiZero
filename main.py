@@ -33,6 +33,7 @@ while not ESTOP:
         'voltage': 100.0,
         'status': 0
     }, robot_time)
+
     command = ds.get_command(robot_time)
 
     if command:
