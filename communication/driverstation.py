@@ -11,7 +11,7 @@ def start():
     print("awaiting connection...")
     conn, addr = server.accept()
     print("connected")
-    conn.send(json.dumps({'type': 'connected', 'ip': addr}).encode('utf-8'))
+    conn.send(json.dumps({'type': 'connected', 'ip': addr[0], 'port': addr[1] }).encode('utf-8'))
 
 def get_command(robot_time):
     if not conn:
