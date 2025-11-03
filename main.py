@@ -10,9 +10,6 @@ import time
 start_time = time.time()
 robot_time = 0
 
-# initialize communication w/ driver station
-ds.start()
-
 # start comms with pico (XRP Controller)
 # xrp.start()
 
