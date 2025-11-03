@@ -36,12 +36,11 @@ while not ESTOP:
         ds.reconnect()
         continue
 
-    if ds.status():
-        ds.send_telemetry({
-            'voltage': 100.0,
-            'status': 0
-        }, robot_time)
-        command = ds.get_command(robot_time)
+    ds.send_telemetry({
+        'voltage': 100.0,
+        'status': 0
+    }, robot_time)
+    command = ds.get_command(robot_time)
 
     if command:
         if command['type'] == 'set_robot_status':
