@@ -18,12 +18,15 @@ def reconnect():
     print("connected")
 
 def get_command(robot_time):
-    data = conn.recv(1024).decode('utf-8')
-    if data:
-        command = json.loads(data)
-        send_message(command, robot_time)
-        return command
-    else:
+    try:
+        data = conn.recv(1024).decode('utf-8')
+        if data:
+            command = json.loads(data)
+            send_message(command, robot_time)
+            return command
+        else:
+            return None
+    except socket.timeout:
         return None
 
 def set_robot_status(value: bool, robot_time):
