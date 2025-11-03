@@ -29,8 +29,7 @@ robot_state = False
 ESTOP = False
 
 while not ESTOP:
-    if not ds.status():
-        print("Waiting for driver station...")
+    while not ds.status():
         continue
     robot_time = time.time() - start_time
     ds.send_telemetry({
