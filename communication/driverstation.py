@@ -14,6 +14,8 @@ def start():
     conn.send(json.dumps({'type': 'connected', 'ip': addr}).encode('utf-8'))
 
 def get_command(robot_time):
+    if not conn:
+        return None
     data = conn.recv(1024).decode('utf-8')
     if data:
         command = json.loads(data)
