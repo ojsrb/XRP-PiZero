@@ -32,6 +32,10 @@ while not ESTOP:
     robot_time = time.time() - start_time
     command = None
 
+    if not ds.status():
+        ds.reconnect()
+        continue
+
     if ds.status():
         ds.send_telemetry({
             'voltage': 100.0,
