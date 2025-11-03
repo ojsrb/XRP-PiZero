@@ -19,6 +19,7 @@ def status():
     return conn != None
 
 def reconnect():
+    print("reconnecting...")
     conn, addr = server.accept()
     conn.settimeout(0.1)
     print("connected")
