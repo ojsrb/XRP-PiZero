@@ -17,8 +17,9 @@ dst = cv_file.getNode('D').mat()
 cv_file.release()
 
 class Camera:
-    def __init__(self, num):
+    def __init__(self, num: int, offset: vec3 = vec3(0,0,0)):
         self.video = cv2.VideoCapture(num)
+        self.offset = offset
 
     def get_frame(self):
         ret, frame = self.video.read()
@@ -48,7 +49,7 @@ def estimate_position(cam: Camera, show_camera: bool = False):
         for i in estimated_positions:
             estimated_position += i
 
-        estimated_position = estimated_position.mul(1/len(estimated_positions))
+        estimated_position = estimated_position.mul(1/len(estimated_positions)) + cam.offset
 
 
     if show_camera:
