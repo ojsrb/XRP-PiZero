@@ -17,7 +17,7 @@ def status():
     return conn != None
 
 def get_command(robot_time):
-    if not conn:
+    if conn is None:
         return None
     data = conn.recv(1024).decode('utf-8')
     if data:
@@ -28,10 +28,19 @@ def get_command(robot_time):
         return None
 
 def set_robot_status(value: bool, robot_time):
+    if conn is None:
+        return False
     conn.send(json.dumps({'type': 'set_robot_status', 'value': value, 'robot_time': robot_time}).encode('utf-8'))
+    return True
 
 def send_message(message, robot_time):
+    if conn is None:
+        return False
     conn.send(json.dumps({'type': 'message', 'message': message, 'robot_time': robot_time}).encode('utf-8'))
+    return True
 
 def send_telemetry(telemetry, robot_time):
+    if conn is None:
+        return False
     conn.send(json.dumps({'type': 'telemetry', 'telemetry': telemetry, 'robot_time': robot_time}).encode('utf-8'))
+    return True

@@ -29,15 +29,16 @@ robot_state = False
 ESTOP = False
 
 while not ESTOP:
-    while not ds.status():
-        continue
     robot_time = time.time() - start_time
-    ds.send_telemetry({
-        'voltage': 100.0,
-        'status': 0
-    }, robot_time)
-    command = ds.get_command(robot_time)
-    print(command)
+    command = None
+
+    if ds.status():
+        ds.send_telemetry({
+            'voltage': 100.0,
+            'status': 0
+        }, robot_time)
+        command = ds.get_command(robot_time)
+
     if command:
         if command['type'] == 'set_robot_status':
             robot_state = command['value']
