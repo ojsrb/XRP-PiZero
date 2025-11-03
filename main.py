@@ -14,10 +14,10 @@ robot_time = 0
 ds.start()
 
 # start comms with pico (XRP Controller)
-xrp.start()
+# xrp.start()
 
 # define robot parts
-main_cam = vision.Camera(0)
+# main_cam = vision.Camera(0)
 
 position = vec3(0,0,0)
 vx = 0 # -1 to 1
@@ -30,7 +30,7 @@ ESTOP = False
 
 while not ESTOP:
     robot_time = time.time() - start_time
-    command = ds.get_command()
+    command = ds.get_command(robot_time)
     if command:
         if command['type'] == 'set_robot_status':
             robot_state = command['value']
@@ -48,12 +48,12 @@ while not ESTOP:
             xrp.send_stop()
             break
 
-    if not xrp.check_for_messages(robot_time):
-        ESTOP = True
-        xrp.send_stop()
-        break
+    # if not xrp.check_for_messages(robot_time):
+    #     ESTOP = True
+    #     xrp.send_stop()
+    #     break
 
 
-    position = vision.estimate_position(main_cam)
+    # position = vision.estimate_position(main_cam)
 
 

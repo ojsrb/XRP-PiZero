@@ -11,10 +11,11 @@ def start():
     conn, addr = server.accept()
     conn.send(json.dumps({'type': 'connected'}).encode('utf-8'))
 
-def get_command():
+def get_command(robot_time):
     data = conn.recv(1024).decode('utf-8')
     if data:
         command = json.loads(data)
+        send_message(command, robot_time)
         return command
     else:
         return None
