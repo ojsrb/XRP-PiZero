@@ -6,11 +6,12 @@ addr = None
 
 def start():
     server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    server.bind(('localhost', 4000))
+    server.bind(('0.0.0.0', 5000))
     server.listen(1)
+    print("awaiting connection...")
     conn, addr = server.accept()
-    conn.send(json.dumps({'type': 'connected'}).encode('utf-8'))
-    print(f"Connected to {addr}")
+    print("connected")
+    conn.send(json.dumps({'type': 'connected', 'ip': addr}).encode('utf-8'))
 
 def get_command(robot_time):
     data = conn.recv(1024).decode('utf-8')
