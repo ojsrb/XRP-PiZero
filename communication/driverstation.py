@@ -4,11 +4,11 @@ import json
 conn = None
 addr = None
 server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+server.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+server.bind(('0.0.0.0', 5000))
+server.listen(1)
 
 def start():
-    server.settimeout(None)
-    server.bind(('0.0.0.0', 5000))
-    server.listen(1)
     print("awaiting connection...")
     conn, addr = server.accept()
     conn.settimeout(0.1)
