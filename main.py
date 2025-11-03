@@ -29,6 +29,8 @@ robot_state = False
 ESTOP = False
 
 while not ESTOP:
+    if not ds.status():
+        continue
     robot_time = time.time() - start_time
     ds.send_telemetry({
         'voltage': 100.0,

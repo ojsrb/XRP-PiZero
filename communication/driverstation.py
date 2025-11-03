@@ -13,6 +13,9 @@ def start():
     print("connected")
     conn.send(json.dumps({'type': 'connected', 'ip': addr[0], 'port': addr[1] }).encode('utf-8'))
 
+def status():
+    return conn != None
+
 def get_command(robot_time):
     if not conn:
         return None
