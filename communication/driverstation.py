@@ -1,7 +1,7 @@
 import socket
 import json
 
-conn: socket.socket
+conn = None
 addr = None
 
 def start():
