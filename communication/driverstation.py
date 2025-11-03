@@ -1,22 +1,14 @@
 import socket
 import json
 
-conn = None
-addr = None
 server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 server.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
 server.bind(('0.0.0.0', 5000))
 server.listen(1)
-
-def start():
-    print("awaiting connection...")
-    conn, addr = server.accept()
-    conn.settimeout(0.1)
-    print("connected")
-    conn.send(json.dumps({'type': 'connected', 'ip': addr[0], 'port': addr[1] }).encode('utf-8'))
-
-def status():
-    return conn != None
+print("awaiting connection...")
+conn, addr = server.accept()
+print("connected")
+conn.send(json.dumps({'type': 'connected', 'ip': addr[0], 'port': addr[1] }).encode('utf-8'))
 
 def reconnect():
     print("reconnecting...")
